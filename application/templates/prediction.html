@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="prediction">
+        <h1>Prediction</h1>
+        <div class="">
+  
+            <form action="{{url_for('prediction.predict')}}" method="POST" class="form-prediction">
+            {{ form.hidden_tag() }}
+
+        {{ form.Year_Built.label(class="align")}}
+        {{ form.Year_Built(placeholder="Quelle est l'année de construction?", class="form-control") }}
+        {{ form.Total_Bsmt_SF.label()}}
+        {{ form.Total_Bsmt_SF(placeholder="Surface de la cave en m2", class="form-control") }}
+        {{ form.Frst_Flr_SF.label()}}
+        {{ form.Frst_Flr_SF(placeholder="Surface du 1er étage en m2", class="form-control") }}
+        {{ form.Gr_Liv_Area.label()}}
+        {{ form.Gr_Liv_Area(placeholder="Surface habitable en m2", class="form-control") }}
+        {{ form.Garage_Area.label()}}
+        {{ form.Garage_Area(placeholder="entre 1 (Mauvais) et 10 (Excellent)", class="form-control") }}
+        {{ form.Overall_Qual.label()}}
+        {{ form.Overall_Qual(placeholder="Surface de la cave en m2", class="form-control") }}
+        {{ form.Full_Bath.label()}}
+        {{ form.Full_Bath(placeholder="Surface de la cave en m2", class="form-control") }}
+        {{ form.Exter_Qual.label()}}
+        {{ form.Exter_Qual(placeholder="Surface de la cave en m2", class="form-control") }}
+        {{ form.Kitchen_Qual.label()}}
+        {{ form.Kitchen_Qual(placeholder="Surface de la cave en m2", class="form-control") }}
+        {{ form.Neighborhood.label()}}
+        {{ form.Neighborhood(placeholder="Surface de la cave en m2", class="form-control") }}
+        {{ form.submit( class="form-control red ma-2")}}
+            </form>
+    </div>
+</div>
+
+<div class="result">
+    <h1>Estimation</h1>
+</div>
+    <p class="result-data"> <br> {{data }} </p>
+</div>
+
+{% endblock %}

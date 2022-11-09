@@ -1,0 +1,41 @@
+{% extends "base.html" %} {% block title %} Login {% endblock %} {% block content %}
+
+
+
+<table id="data" class="table table-striped align">
+    <thead>
+      <tr>
+        <th>Year_Built</th>
+        <th>Total_Bsmt_SF</th>
+        <th>Frst_Flr_SF</th>
+        <th>Gr_Liv_Area</th>
+        <th>Overall_Qual</th>
+        <th>Full_Bath</th>
+        <th>Exter_Qual</th>
+        <th>Kitchen_Qual</th>
+        <th>Neighborhood</th>
+        <th>Price</th>
+        <th>Created_on</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for prediction in predictions %}
+        <tr>
+          <td>{{ prediction.Year_Built }}</td>
+          <td>{{ prediction.Total_Bsmt_SF }}</td>
+          <td>{{ prediction.Frst_Flr_SF }}</td>
+          <td>{{ prediction.Gr_Liv_Area }}</td>
+          <td>{{ prediction.Overall_Qual }}</td>
+          <td>{{ prediction.Full_Bath }}</td>
+          <td>{{ prediction.Exter_Qual }}</td>
+          <td>{{ prediction.Kitchen_Qual }}</td>
+          <td>{{ prediction.Neighborhood }}</td>
+          <td>{{ prediction.price }}</td>
+          <td>{{ prediction.created_on }}</td>
+          <td> Delete</td>
+        </tr>
+      {% endfor %}
+
+
+{% endblock %}

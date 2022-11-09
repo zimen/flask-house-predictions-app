@@ -1,0 +1,14 @@
+Werkzeug==2.0.1
+numpy 
+pandas 
+joblib
+scikit-learn==1.0.2
+flask==2.0.1
+WTForms==3.0.1
+Flask-WTF==1.0.1
+python-dotenv==0.20.0
+flask-sqlalchemy==2.5.1
+flask-login==0.6.2
+sqlalchemy==1.4.40
+urllib3
+gunicorn

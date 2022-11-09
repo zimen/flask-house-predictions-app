@@ -1,0 +1,52 @@
+{% extends "base.html" %} {% block title %} Login {% endblock %} {% block content %}
+
+<div class="main1">
+  {% if current_user.is_authenticated %}
+  <h1>Welcome {{ current_user.fisrtname}} {{current_user.lastname }}</h1>
+  {% else %}
+  <h1>Welcome to my website project</h1>
+  {% endif %}
+  <p>House pricing prediction and more</p>
+</div>
+
+<div class="main2">
+
+  
+  <div class="rowflex">
+
+    {% if current_user.is_authenticated %}
+    <img src="{{url_for('static', filename='img.jpg')}}" align="middle" class="home-img"/>
+    {% else %}
+
+    <form method="POST" class="form-register">
+      <div>{{ form.hidden_tag() }}</div>
+      <div class="form-inside">
+        <div class="email">
+          <div class="email-label">Email:</div>
+          {{form.email(placeholder="exemple@exemple.com",
+          class="form-control")}}
+        </div>
+        <div class="password">
+          <div class="password-label">Password:</div>
+          {{form.password(placeholder="***********", class="form-control")}}
+        </div>
+
+        <div class="rowflex">
+          <div class="element">
+            {{ form.submit(class="btn bouton", id="button")}}
+          </div>
+          <div class="element">
+            <a href="{{ url_for('auth.add_user') }}">Register</a>
+          </div>
+        </div>
+      </div>
+    </form>
+    {%endif%}
+  </div>
+</div>
+
+<div class="main3"> </div>
+
+
+
+{% endblock %}

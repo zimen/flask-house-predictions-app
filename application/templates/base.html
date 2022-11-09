@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap pour flask login -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/grid.css">
+
+  <title>
+    {% block title %}
+    {% endblock %}
+  </title>
+
+</head>
+
+  <nav>
+    <ul>
+      <a aria-current="page" href="{{ url_for('auth.home') }}">Home</a>
+      {% if current_user.is_authenticated %}
+      <a class="nav-link" href="{{ url_for('prediction.index') }}">Prediction</a>
+      <a class="nav-link" href="{{ url_for('prediction.history') }}">Watch history</a>
+      <a class="nav-link" href="{{ url_for('auth.logout_page') }}">Log out</a>
+      {% else %}
+      <a class="nav-link" href="{{ url_for('auth.login') }}">Log in</a>
+      <a class="nav-link" href="{{ url_for('auth.add_user') }}">Create an account</a>
+      {% endif %}
+    </ul>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category,message in messages %}
+    <div class="alert alert-{{ category }} alter-dismissable fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+  </nav>
+  
+  <body class="main">
+  {% block content %}
+  {% endblock %}
+</body>
+
+  <div class="foot">
+    <div>
+      <h5 class="white align pa-8">Contact</h5>
+    </div>
+  </div>
+
+</html>

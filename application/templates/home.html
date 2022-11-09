@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block title %} Login {% endblock %} {% block content %}
+
+<div class="main1">
+  {% if current_user.is_authenticated %}
+  <h1>Welcome {{ current_user.fisrtname}} {{current_user.lastname }}</h1>
+  {% else %}
+  <h1>Welcome to my website project</h1>
+  {% endif %}
+  <p>House pricing prediction and more</p>
+</div>
+
+<div class="main2">
+
+  
+  <div class="rowflex">
+
+    <img src="{{url_for('static', filename='img.jpg')}}" align="middle" class="home-img"/>
+  </div>
+</div>
+
+<div class="main3"> </div>
+
+{% endblock %}
