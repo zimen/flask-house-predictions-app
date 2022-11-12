@@ -20,13 +20,6 @@ class Prediction(db.Model, UserMixin):
     price = db.Column(db.Integer()) 
     created_on = db.Column(db.DateTime(), default=datetime.datetime.now())
     
-    # One to Many: https://overiq.com/flask-101/database-modelling-in-flask/
-    # https://stackoverflow.com/questions/38792722/flask-foreign-key-constraint
-    
-    
-    # table flask : https://blog.miguelgrinberg.com/post/beautiful-interactive-tables-for-your-flask-templates
-    # https://flask-table.readthedocs.io/en/stable/
-    
     
     def save_to_db(self):
         db.session.add(self)

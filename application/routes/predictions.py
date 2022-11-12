@@ -7,7 +7,7 @@ from application import db
 from application.database.predictions import Prediction
 
 model = joblib.load(open('model/fit/model.joblib', 'rb'))
-prediction = Blueprint('prediction', __name__, url_prefix='/predictions')
+prediction = Blueprint('prediction', __name__, url_prefix='/prediction')
 
 @prediction.route('/')
 def index():
@@ -16,7 +16,7 @@ def index():
 @prediction.route('/predict', methods=['GET', 'POST'])
 def predict():
     form = PredictionForm()
-    if form.validate_on_submit():
+    if form.submit():
         X_predict = {}
         for var in ['Year_Built', 'Total_Bsmt_SF', 'Frst_Flr_SF', 'Gr_Liv_Area','Garage_Area', 'Overall_Qual', 'Full_Bath', 'Exter_Qual',
                 'Kitchen_Qual', 'Neighborhood']:
@@ -24,7 +24,8 @@ def predict():
                 X_predict[var]= request.form[var]
             else:
                 X_predict[var]= int(request.form[var])
-        pred = int(model.predict(pd.DataFrame(X_predict, index=[0])))
+        df_prediction = pd.DataFrame(X_predict, index=[0])
+        pred = int(model.predict(df_prediction))
         X_predict['price'] = pred
         Prediction(**X_predict, user_id=current_user.id).save_to_db()
     return render_template('prediction.html', data=f'{pred} $', form=form)

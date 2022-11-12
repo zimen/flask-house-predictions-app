@@ -25,7 +25,7 @@ class PredictionForm(FlaskForm):
         DataRequired() , NumberRange(min=0, message="Negative value is not possible")], default=55)
     
     Overall_Qual = IntegerField(label='Qualité générale', validators=[
-        DataRequired() , NumberRange(min=0, max=5, message="Value must be between 0 and 5")], default=5)
+        DataRequired() , NumberRange(min=0, max=11, message="Value must be between 0 and 5")], default=5)
     
     Full_Bath = IntegerField(label='Année de construction', validators=[
         DataRequired(), NumberRange(min=0, message="Negative value is not possible")], default=3)

@@ -121,7 +121,7 @@ h1, .align {
 }
 
 .home-img {
-    width: 60vh;
+    width: 60vh !important;
     padding: 4%;
 }
 
