@@ -5,9 +5,9 @@
 {% block content %}
 
 
-    <div class="prediction">
-        <h1>Prediction</h1>
-        <div class="">
+<div class="">
+    <h1>Prediction</h1>
+            <div class="prediction">
   
             <form action="{{url_for('prediction.predict')}}" method="POST" class="form-prediction">
             {{ form.hidden_tag() }}
