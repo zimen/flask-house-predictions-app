@@ -25,7 +25,7 @@ def create_app():
     def load_user(user_id):
         return User.query.get(int(user_id))
     
-    from application.routes.predictions import prediction
+    from application.routes.prediction import prediction
     from application.routes.auth import auth
     app.register_blueprint(prediction)
     app.register_blueprint(auth)

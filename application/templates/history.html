@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block title %} Login {% endblock %} {% block content %}
+{% extends "base.html" %} {% block title %} {% endblock %} {% block content %}
 
 
 
@@ -22,15 +22,15 @@
     <tbody>
       {% for prediction in predictions %}
         <tr>
-          <td>{{ prediction.Year_Built }}</td>
-          <td>{{ prediction.Total_Bsmt_SF }}</td>
-          <td>{{ prediction.Frst_Flr_SF }}</td>
-          <td>{{ prediction.Gr_Liv_Area }}</td>
-          <td>{{ prediction.Overall_Qual }}</td>
-          <td>{{ prediction.Full_Bath }}</td>
-          <td>{{ prediction.Exter_Qual }}</td>
-          <td>{{ prediction.Kitchen_Qual }}</td>
-          <td>{{ prediction.Neighborhood }}</td>
+          <td>{{ prediction.year_remod_add }}</td>
+          <td>{{ prediction.total_bsmt_sf }}</td>
+          <td>{{ prediction.first_flr_sf }}</td>
+          <td>{{ prediction.gr_liv_area }}</td>
+          <td>{{ prediction.overall_qual }}</td>
+          <td>{{ prediction.full_bath }}</td>
+          <td>{{ prediction.exter_qual }}</td>
+          <td>{{ prediction.kitchen_qual }}</td>
+          <td>{{ prediction.neighborhood }}</td>
           <td>{{ prediction.price }}</td>
           <td>{{ prediction.created_on }}</td>
           <td> Delete</td>
