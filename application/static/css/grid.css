@@ -55,7 +55,17 @@ nav ul a {
 
 .prediction {
     grid-area : main1;
-    padding: 3%;
+    padding: 2%;
+}
+
+.form-sider {
+    display: flex;
+    flex-direction: row;
+    width: 150%;
+}
+
+.pred-title {
+    text-align: center;
 }
 
 .result {

@@ -107,11 +107,11 @@ class PredictionForm(FlaskForm):
     garage_cars = IntegerField(label="Nombre de voiture entrant dans le garage", validators=[
         DataRequired() , NumberRange(min=0, message="Negative value is not possible")], default=0)
     
-    garage_finish = SelectField(label="Qualité de l'exterieur", validators=[
-        DataRequired()], choices=['Fin', 'Unf', 'RFn'] , default="Fin")
-    
     garage_area = IntegerField(label="Surface du garage en m2", validators=[
         DataRequired() , NumberRange(min=0, message="Negative value is not possible")], default=55)
+    
+    garage_finish = SelectField(label="Qualité de l'exterieur", validators=[
+        DataRequired()], choices=['Fin', 'Unf', 'RFn'] , default="Fin")
     
     sale_condition = SelectField(label="Qualité de l'exterieur", validators=[
         DataRequired()], choices=['Normal', 'Partial', 'Family', 'Abnorml', 'Alloca', 'AdjLand'], default="Ex")
