@@ -33,7 +33,7 @@
           <td>{{ prediction.neighborhood }}</td>
           <td>{{ prediction.price }}</td>
           <td>{{ prediction.created_on }}</td>
-          <td> Delete</td>
+          <td> <a href="{{ url_for('prediction.history', id=prediction.id)}}"> Delete </a></td>
         </tr>
       {% endfor %}
 

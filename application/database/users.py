@@ -15,6 +15,10 @@ class User(db.Model, UserMixin):
         db.session.add(self)
         db.session.commit()
 
+    def delete_from_db(self):
+        db.session.delete(self)
+        db.session.commit()
+
 def init_db():
     db.create_all()
     User( firstname= "Ayoub", 

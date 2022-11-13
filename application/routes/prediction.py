@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 from flask_login import current_user
 import pandas as pd
 import joblib
@@ -34,8 +34,13 @@ def predict():
 
 
 
-@prediction.route('/history', methods=['GET'])
+@prediction.route('/history', methods=['GET','POST'])
 def history():
+    prediction_id = request.args.get('id')
+    print(prediction_id)
+    if prediction_id:
+        Prediction.query.filter(Prediction.id == prediction_id).first().delete_from_db()
+        print("user deleted")
     predictions = db.session.query(Prediction).where(Prediction.user_id == current_user.id).all()
     return render_template('history.html', predictions=predictions)
     

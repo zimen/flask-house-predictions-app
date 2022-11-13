@@ -44,7 +44,10 @@ class Prediction(db.Model, UserMixin):
     sale_condition = db.Column(db.String())
     price = db.Column(db.Integer()) 
     
-    
     def save_to_db(self):
         db.session.add(self)
+        db.session.commit()
+        
+    def delete_from_db(self):
+        db.session.delete(self)
         db.session.commit()
