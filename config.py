@@ -10,7 +10,6 @@ def get_settings():
 
 class Settings(BaseSettings):
     DBHOST: str
-    DBPORT: int
     DBNAME: str
     DBUSER: str
     DBPASS: str
