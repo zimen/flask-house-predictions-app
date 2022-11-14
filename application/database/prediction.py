@@ -8,7 +8,6 @@ class Prediction(db.Model, UserMixin):
     id = db.Column(db.Integer(), primary_key=True, nullable=False, unique=True)
     user_id = db.Column(db.Integer(), db.ForeignKey('User.id'))
     created_on = db.Column(db.DateTime(), default=datetime.datetime.now())
-    
     overall_qual = db.Column(db.Integer())
     neighborhood = db.Column(db.String()) 
     year_remod_add = db.Column(db.Integer())

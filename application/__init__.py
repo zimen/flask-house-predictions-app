@@ -1,7 +1,8 @@
 from flask import Flask
 from flask_login import LoginManager
-from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from dotenv import load_dotenv
 import os
 load_dotenv()
 
@@ -16,6 +17,7 @@ def create_app():
 
     from application.database.users import User, init_db
     db.init_app(app)
+    migrate = Migrate(app, db)
     
     login_manager = LoginManager(app)
     login_manager.login_view = "login"
@@ -29,10 +31,6 @@ def create_app():
     from application.routes.auth import auth
     app.register_blueprint(prediction)
     app.register_blueprint(auth)
-    
-    if not os.path.isfile("application/database/database.db"):
-        app.app_context().push()
-        init_db()
     
     return app
 
