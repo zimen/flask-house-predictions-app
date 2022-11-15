@@ -19,6 +19,7 @@ def login():
         if user and check_password_hash(user.password_hash, form.password.data):
             login_user(user)
             flash("Logged in with success", category="success")
+            print("un user s'est connecté")
             return redirect(url_for('auth.home'))
         else:
             flash("Mail address or password invalid", category="danger")
