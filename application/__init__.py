@@ -7,32 +7,43 @@ import os
 load_dotenv()
 
 db = SQLAlchemy()
-SQLALCHEMY_DATABASE_URL = f'postgresql://{os.getenv("DBUSER")}:{os.getenv("DBPASS")}@{os.getenv("DBHOST")}/{os.getenv("DBNAME")}'
+SQLALCHEMY_DATABASE_URL = f'postgresql+psycopg2://{os.getenv("DBUSER")}:{os.getenv("DBPASS")}@{os.getenv("DBHOST")}/{os.getenv("DBNAME")}'
+DEBUG = False
+ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else []
+CSRF_TRUSTED_ORIGINS = ['https://'+ os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else []
 
-def create_app():
-    app = Flask(__name__)
-    app.config["SECRET_KEY"] = os.getenv('SECRET_KEY')
-    app.config["WTF_CSRF_SECRET_KEY"] = os.getenv('WTF_CSRF_SECRET_KEY')
-    app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URL
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+# Configure Postgres database; the full username for PostgreSQL flexible server is
+# username (not @sever-name).
+DATABASE_URI = 'postgresql+psycopg2://{dbuser}:{dbpass}@{dbhost}/{dbname}'.format(
+    dbuser=os.environ['DBUSER'],
+    dbpass=os.environ['DBPASS'],
+    dbhost=os.environ['DBHOST'] + ".postgres.database.azure.com",
+    dbname=os.environ['DBNAME']
+)
+app = Flask(__name__)
+app.config["SECRET_KEY"] = os.getenv('SECRET_KEY')
+app.config["WTF_CSRF_SECRET_KEY"] = os.getenv('WTF_CSRF_SECRET_KEY')
+app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URL
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config.from_object('config')
 
-    from application.database.users import User, init_db
-    db.init_app(app)
-    migrate = Migrate(app, db)
-    
-    login_manager = LoginManager(app)
-    login_manager.login_view = "login"
-    login_manager.init_app(app)
-    
-    @login_manager.user_loader
-    def load_user(user_id):
-        return User.query.get(int(user_id))
-    
-    from application.routes.prediction import prediction
-    from application.routes.auth import auth
-    app.register_blueprint(prediction)
-    app.register_blueprint(auth)
-    
-    return app
+app.config.update(
+SQLALCHEMY_DATABASE_URI=app.config.get('DATABASE_URI'),
+SQLALCHEMY_TRACK_MODIFICATIONS=False,
+)
+from application.database.users import User, init_db
+db.init_app(app)
+migrate = Migrate(app, db)
 
-app = create_app()
+login_manager = LoginManager(app)
+login_manager.login_view = "login"
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+from application.routes.prediction import prediction
+from application.routes.auth import auth
+app.register_blueprint(prediction)
+app.register_blueprint(auth)
