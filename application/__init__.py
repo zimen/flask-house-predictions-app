@@ -3,13 +3,11 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from dotenv import load_dotenv
-from config import get_settings
 import os
 load_dotenv()
 
 db = SQLAlchemy()
-st = get_settings()
-SQLALCHEMY_DATABASE_URL = f'postgresql://{st.DBUSER}:{st.DBPASS}@{st.DBHOST}/{st.DBNAME}'
+SQLALCHEMY_DATABASE_URL = f'postgresql://{os.getenv("DBUSER")}:{os.getenv("DBPASS")}@{os.getenv("DBHOST")}/{os.getenv("DBNAME")}'
 
 def create_app():
     app = Flask(__name__)
